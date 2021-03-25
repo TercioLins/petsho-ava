@@ -1,4 +1,6 @@
 
+const moment = require('moment')
+
 let nomePetshop = "PETSHOP AVANADE";
 
 let pets = [
@@ -56,6 +58,9 @@ const vacinarPet = (pet) => {
         exibirPet(pet)
         return 1
     }
+    else{
+        return 0
+    }
 }
 
 const campanhaVacinacao = (pet) => {
@@ -66,10 +71,55 @@ const campanhaVacinacao = (pet) => {
     console.log(vacinados)
 }
 
+const darBanhoPet = (pet) => {
+    let dataHoje = moment().format('DD-MM-YYYY')
+    pet.servicos.push({'Serviço': "Banho ",
+    Data: dataHoje
+    })
+
+}
+
+const tosarPet = (pet) =>{
+    let dataHoje = moment().format('DD-MM-YYYY')
+    pet.servicos.push({'Serviço': "Tosa ",
+    Data: dataHoje
+    })
+
+}
+
+const apararUnhasPet = (pet) => {
+    let dataHoje = moment().format('DD-MM-YYYY')
+    pet.servicos.push({'Serviço': "Aparou unhas ",
+    Data: dataHoje
+    })
+
+}
+
+
+const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
+    let pet =  {
+        nome: nome,
+        tipo: tipo,
+        idade: idade,
+        raca: raca,
+        peso: peso,
+        tutor: tutor,
+        vacinado: vacinado,
+        servicos: []
+    }
+    pets.push(pet)
+}
+
 
 
 
 //listarPets();
-//vacinarPet(pets[2])
-campanhaVacinacao()
 
+adocionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
+adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
+//campanhaVacinacao()
+darBanhoPet(pets[3])
+tosarPet(pets[3])
+apararUnhasPet(pets[3])
+
+console.log(pets[3])
