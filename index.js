@@ -1,4 +1,5 @@
-const nomePetshop = "PETSHOP AVANADE";
+
+let nomePetshop = "PETSHOP AVANADE";
 
 let pets = [
     {
@@ -18,7 +19,7 @@ let pets = [
         raca: 'São bernardo',
         peso: 30,
         tutor: 'Luana',
-        vacinado: true,
+        vacinado: false,
         servicos: ['banho', 'tosa']
     },
     {
@@ -62,8 +63,11 @@ const campanhaVacinacao = (pet) => {
     for (pet of pets){
         vacinados += vacinarPet(pet)
     }
-    console.log(vacinados + " Animais foram vacinados!")
+    console.log(vacinados)
 }
+
+
+
 
 //listarPets();
 //vacinarPet(pets[2])
