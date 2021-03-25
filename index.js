@@ -1,45 +1,71 @@
-const nomepetshop = 'PETSHOP AVANADE';
-let pets = [{
-    nome: 'Ringo',
-    tipo: 'cachorro',
-    idade: 5,
-    raca: 'Vira-lata',
-    peso: 8,
-    tutor: 'joao',
-    contato: '(11)98899-4545',
-    vacinado: true,
-    servicos: ['banho','tosa']
-},{
-    nome: 'Snoopy',
-    tipo: 'cachorro',
-    idade: 2,
-    raca: 'Beagle',
-    peso: 8,
-    tutor: 'joao',
-    contato: '(11)98899-4545',
-    vacinado: true,
-    servicos: ['banho','tosa']
-},
-{
-    nome: 'Sula Manca',
-    tipo: 'Cachorro',
-    idade: 10,
-    raca: 'Manhosa',
-    peso: 8,
-    tutor: 'maria',
-    contato: '(11)98179-4545',
-    vacinado: true,
-    servicos: ['banho','tosa']
-}
+const nomePetshop = "PETSHOP AVANADE";
+
+let pets = [
+    {
+        nome: 'luna',
+        tipo: 'cachorro',
+        idade: 2,
+        raca: 'Vira-lata',
+        peso: 10,
+        tutor: 'Edson',
+        vacinado: false,
+        servicos: ['banho', 'vermifugação']
+    },
+    {
+        nome: 'foguete',
+        tipo: 'cachorro',
+        idade: 1,
+        raca: 'São bernardo',
+        peso: 30,
+        tutor: 'Luana',
+        vacinado: true,
+        servicos: ['banho', 'tosa']
+    },
+    {
+        nome: 'Bob',
+        tipo: 'gato',
+        idade: 3,
+        raca: 'cianes',
+        peso: 2,
+        tutor: 'barbara',
+        vacinado: false,
+        servicos: ['banho', 'vacinação']
+    },
 ];
 
-
-const ListarPets = () => {
+// 
+const exibirPet = (pet) => {
+    console.log(`Nome: ${pet.nome}
+    Idade: ${pet.idade}
+    Tipo: ${pet.tipo}
+    Raca: ${pet.raca}
+    Vacinado: ${pet.vacinado}`)
+}
+const listarPets = () => {
+   
     for(let pet of pets){
-    // for (let i=0; i < pets.length; i++){
-        // console.log(`${i} - O nome do Pet é : ${pets[i].nome + ' >> ' + pets[i].raca}`);
-        console.log(`${pet.nome}, ${pet.idade}, ${pet.tipo}, ${pet.raca} `)
+        exibirPet(pet)
     }
 }
-ListarPets();
-// console.log(pets)
+
+const vacinarPet = (pet) => {
+    
+    if(pet.vacinado == false){
+        pet.vacinado = true
+        exibirPet(pet)
+        return 1
+    }
+}
+
+const campanhaVacinacao = (pet) => {
+    let vacinados = 0
+    for (pet of pets){
+        vacinados += vacinarPet(pet)
+    }
+    console.log(vacinados + " Animais foram vacinados!")
+}
+
+//listarPets();
+//vacinarPet(pets[2])
+campanhaVacinacao()
+
