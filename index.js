@@ -21,10 +21,10 @@ let pets = [{
     servicos: ['banho','tosa']
 },
 {
-    nome: 'Bob Marley',
-    tipo: 'gato',
-    idade: 1,
-    raca: 'Siames',
+    nome: 'Sula Manca',
+    tipo: 'Cachorro',
+    idade: 10,
+    raca: 'Manhosa',
     peso: 8,
     tutor: 'maria',
     contato: '(11)98179-4545',
@@ -35,8 +35,10 @@ let pets = [{
 
 
 const ListarPets = () => {
-    for (let i=0; i < pets.length; i++){
-        console.log('   ' + pets[i].nome + ' : ' + pets[i].raca);
+    for(let pet of pets){
+    // for (let i=0; i < pets.length; i++){
+        // console.log(`${i} - O nome do Pet é : ${pets[i].nome + ' >> ' + pets[i].raca}`);
+        console.log(`${pet.nome}, ${pet.idade}, ${pet.tipo}, ${pet.raca} `)
     }
 }
 ListarPets();
