@@ -1,40 +1,41 @@
-
-const moment = require('moment')
+const bancodados = require('./bancodados.json');
+const moment = require('moment');
 
 let nomePetshop = "PETSHOP AVANADE";
 
-let pets = [
-    {
-        nome: 'luna',
-        tipo: 'cachorro',
-        idade: 2,
-        raca: 'Vira-lata',
-        peso: 10,
-        tutor: 'Edson',
-        vacinado: false,
-        servicos: ['banho', 'vermifugação']
-    },
-    {
-        nome: 'foguete',
-        tipo: 'cachorro',
-        idade: 1,
-        raca: 'São bernardo',
-        peso: 30,
-        tutor: 'Luana',
-        vacinado: false,
-        servicos: ['banho', 'tosa']
-    },
-    {
-        nome: 'Bob',
-        tipo: 'gato',
-        idade: 3,
-        raca: 'cianes',
-        peso: 2,
-        tutor: 'barbara',
-        vacinado: false,
-        servicos: ['banho', 'vacinação']
-    },
-];
+let pets = bancodados.pets
+//let pets = [
+//    {
+//        nome: 'luna',
+//        tipo: 'cachorro',
+//        idade: 2,
+//        raca: 'Vira-lata',
+//        peso: 10,
+//        tutor: 'Edson',
+//        vacinado: false,
+//        servicos: ['banho', 'vermifugação']
+//   },
+//    {
+//        nome: 'foguete',
+//        tipo: 'cachorro',
+//        idade: 1,
+//        raca: 'São bernardo',
+//        peso: 30,
+//        tutor: 'Luana',
+//        vacinado: false,
+//        servicos: ['banho', 'tosa']
+//    },
+//    {
+//        nome: 'Bob',
+//        tipo: 'gato',
+//        idade: 3,
+//        raca: 'cianes',
+//        peso: 2,
+//        tutor: 'barbara',
+//        vacinado: false,
+//        servicos: ['banho', 'vacinação']
+//   },
+//];
 
 // 
 const exibirPet = (pet) => {
@@ -113,13 +114,15 @@ const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
 
 
 
-//listarPets();
+listarPets();
 
-adocionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
-adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
-//campanhaVacinacao()
-darBanhoPet(pets[3])
-tosarPet(pets[3])
-apararUnhasPet(pets[3])
+// adocionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
+// adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
+// //campanhaVacinacao()
+// darBanhoPet(pets[3])
+// tosarPet(pets[3])
+// apararUnhasPet(pets[3])
 
-console.log(pets[3])
+// console.log(pets[3])
+//testeJSON = JSON.stringify(pets);
+//console.log(testeJSON);
