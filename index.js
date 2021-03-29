@@ -1,128 +1,110 @@
-const bancodados = require('./bancodados.json');
 const moment = require('moment');
+const fs = require('fs');
+let bancoDados = fs.readFileSync('./bancoDados.json');
 
-let nomePetshop = "PETSHOP AVANADE";
+bancoDados = JSON.parse(bancoDados);
 
-let pets = bancodados.pets
-//let pets = [
-//    {
-//        nome: 'luna',
-//        tipo: 'cachorro',
-//        idade: 2,
-//        raca: 'Vira-lata',
-//        peso: 10,
-//        tutor: 'Edson',
-//        vacinado: false,
-//        servicos: ['banho', 'vermifugação']
-//   },
-//    {
-//        nome: 'foguete',
-//        tipo: 'cachorro',
-//        idade: 1,
-//        raca: 'São bernardo',
-//        peso: 30,
-//        tutor: 'Luana',
-//        vacinado: false,
-//        servicos: ['banho', 'tosa']
-//    },
-//    {
-//        nome: 'Bob',
-//        tipo: 'gato',
-//        idade: 3,
-//        raca: 'cianes',
-//        peso: 2,
-//        tutor: 'barbara',
-//        vacinado: false,
-//        servicos: ['banho', 'vacinação']
-//   },
-//];
-
-// 
-const exibirPet = (pet) => {
-    console.log(`Nome: ${pet.nome}
-    Idade: ${pet.idade}
-    Tipo: ${pet.tipo}
-    Raca: ${pet.raca}
-    Vacinado: ${pet.vacinado}`)
+const atualizarBanco = () => {
+    //conversão de objeto javascript para JSON
+    let petsAtualizado = JSON.stringify(bancoDados);
+    //atualização do arquivo bancoDados.json
+    fs.writeFileSync('bancoDados.json', petsAtualizado, 'utf-8');
 }
+
+// const listarPets = () => {
+//     for (let pet of bancoDados.pets) {
+//         //template string
+//         console.log(`${pet.nome}, ${pet.idade}, ${pet.tipo}, ${pet.raca}, ${(pet.vacinado) ? 'vacinado': 'não vacinado'}`);
+
+//         for (const servico of pet.servicos) {
+//             console.log(`${servico.data} - ${servico.nome}`);
+//         }
+//     }
+// }
+
 const listarPets = () => {
-   
-    for(let pet of pets){
-        exibirPet(pet)
-    }
-}
-
-const vacinarPet = (pet) => {
     
-    if(pet.vacinado == false){
-        pet.vacinado = true
-        exibirPet(pet)
-        return 1
+    for (let pet of bancoDados.pets){
+        console.log(`${pet.nome}, ${pet.idade} ${anosDeIdade(pet)} , ${pet.tipo}, raça ${pet.raca}.`);
+
+        for (const servico of pet.servicos) {
+            console.log(`Serviço: ${servico.nome} | Realizado em: ${servico.data}`);
+        }
+        if (pet.vacinado ? console.log('Está vacinado!') : console.log('Não vacinado!'));
+        console.log('-----------------------------')
     }
-    else{
-        return 0
+}
+
+const vacinarPet = pet => {
+    if (!pet.vacinado) {
+        pet.vacinado = true;
+        console.log(`${pet.nome} foi vacinado com sucesso!`);
+    } else {
+        console.log(`Ops, ${pet.nome} já está vacinado!`);
     }
 }
 
-const campanhaVacinacao = (pet) => {
-    let vacinados = 0
-    for (pet of pets){
-        vacinados += vacinarPet(pet)
+const campanhaVacina = () => {
+    console.log("Campanha de vacina 2020");
+    console.log("vacinando...");
+
+    let petVacinadosCampanha = 0;
+    for (let pet of bancoDados.pets) {
+        if (!pet.vacinado) {
+            vacinarPet(pet);
+            petVacinadosCampanha++;
+        }
     }
-    console.log(vacinados)
+    console.log(`${petVacinadosCampanha} pets foram vaciados nessa campanha!`);
+};
+
+const adicionarPet = novoPet => {
+        bancoDados.pets.push(novoPet);
+        atualizarBanco();
+        console.log(`${novoPet.nome} foi adicionado com sucesso!`);
 }
 
-const darBanhoPet = (pet) => {
-    let dataHoje = moment().format('DD-MM-YYYY')
-    pet.servicos.push({'Serviço': "Banho ",
-    Data: dataHoje
-    })
+const darBanhoPet = pet => {
+    pet.servicos.push({
+        'nome':'banho',
+        'data': moment().format('DD-MM-YYYY')
+    });
+    console.log(`${pet.nome} está de banho tomado!`);
+};
 
+const tosarPet = pet => {
+    pet.servicos.push({
+        'nome':'tosa',
+        'data': moment().format('DD-MM-YYYY')
+    });
+    console.log(`${pet.nome} está com cabelinho na régua :)`);
+};
+
+const apararUnhasPet = pet => {
+    pet.servicos.push({
+        'nome':'corte de unhas',
+        'data': moment().format('DD-MM-YYYY')
+    });
+    console.log(`${pet.nome} está de unhas aparadas!`);
+};
+
+const atenderCliente = (pet, servico) => {
+    console.log(`Olá, iremos cuidar do ${pet.nome}`)
+    servico;
 }
+// darBanhoPet(bancoDados.pets[0]);
 
-const tosarPet = (pet) =>{
-    let dataHoje = moment().format('DD-MM-YYYY')
-    pet.servicos.push({'Serviço': "Tosa ",
-    Data: dataHoje
-    })
+// console.log("-----------")
+// listarPets();
 
-}
-
-const apararUnhasPet = (pet) => {
-    let dataHoje = moment().format('DD-MM-YYYY')
-    pet.servicos.push({'Serviço': "Aparou unhas ",
-    Data: dataHoje
-    })
-
-}
-
-
-const adocionarNovoPet = (nome, tipo, idade, raca, peso, tutor, vacinado) => {
-    let pet =  {
-        nome: nome,
-        tipo: tipo,
-        idade: idade,
-        raca: raca,
-        peso: peso,
-        tutor: tutor,
-        vacinado: vacinado,
-        servicos: []
-    }
-    pets.push(pet)
-}
-
-
-
-
-listarPets();
-
-// adocionarNovoPet("Tico", "gato", 3, "siames", 2, "Tercio", false)
-// adocionarNovoPet("Dog", "cachorro", 1, "poodle", 5, "Jurema", true)
-// //campanhaVacinacao()
-// darBanhoPet(pets[3])
-// tosarPet(pets[3])
-// apararUnhasPet(pets[3])
-
-// console.log(pets[3])
-//testeJSON = JSON.stringify(pets);
-//console.log(testeJSON);
+// adicionarPet({
+//     "nome": "Romarinho",
+//     "tipo": "cachorro",
+//     "idade": 3,
+//     "raca": "American",
+//     "peso": 28,
+//     "tutor": "Bruno",
+//     "contato": "(11) 99999-9999",
+//     "vacinado": true,
+//     "servicos": []
+//});
