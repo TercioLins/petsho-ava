@@ -134,10 +134,24 @@ const clientePremium = (pet) => {
     }
 }
 
+const filtrarTutor = (nomeTutor) => {
+    let petsTutor = bancoDados.pets.filter((pet)=>{
+        return pet.tutor == nomeTutor;
+    })
+    console.log(`Pets do tutor:${nomeTutor}`)
+    petsTutor.forEach((pet) => {
+        console.log(`${pet.nome} - ${pet.tipo}`)
+    })
+}
+
+
+
+filtrarTutor('Edson');
+
 // darBanhoPet(bancoDados.pets[0]);
 
 // console.log("-----------")
-listarPets();
+// listarPets();
 
 // adicionarPet({
 //     "nome": "Romarinho",
